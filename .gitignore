@@ -3,3 +3,5 @@ arcaea result.csv
 arcaea_result.xlsx
 __pycache__/libarc.cpython-37.pyc
 .ipynb_checkpoints/arcaea_parser-checkpoint.ipynb
+.vscode/settings.json
+__pycache__/libarc.cpython-36.pyc
