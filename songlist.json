@@ -4167,7 +4167,6 @@
         "ja": "グルーヴコースター"
       },
       "source_copyright": "© TAITO CORP. 1978, 2019",
-      "world_unlock": false,
       "bg": "gc_light",
       "remote_dl": true,
       "world_unlock": false,
@@ -4212,7 +4211,6 @@
         "ja": "グルーヴコースター"
       },
       "source_copyright": "© TAITO CORP. 1978, 2019",
-      "world_unlock": false,
       "bg": "gc_conflict",
       "remote_dl": true,
       "world_unlock": false,
@@ -4257,7 +4255,6 @@
         "ja": "グルーヴコースター"
       },
       "source_copyright": "© TAITO CORP. 1978, 2019",
-      "world_unlock": false,
       "bg": "gc_lance",
       "remote_dl": true,
       "world_unlock": false,
@@ -4302,7 +4299,6 @@
         "ja": "グルーヴコースター"
       },
       "source_copyright": "© TAITO CORP. 1978, 2019",
-      "world_unlock": false,
       "bg": "gc_ouroboros",
       "remote_dl": true,
       "world_unlock": false,
