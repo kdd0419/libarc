@@ -8,14 +8,8 @@ headers = {
     'Accept': '*/*',
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Accept-Encoding': 'br, gzip, deflate',
-<<<<<<< HEAD
-    'AppVersion': '2.0.3',
-    'Cookie': '',
-    'User-Agent': 'Arc-mobile/2.0.1.0 CFNetwork/976 Darwin/18.2.0'
-=======
     'AppVersion': '2.1.0',
     'User-Agent': 'Arc-mobile/2.1.0.0 CFNetwork/976 Darwin/18.2.0'
->>>>>>> b7e6bac2cda99c9033eba75f5c9df5ee87616754
 }
 
 # generate uuid: str(uuid.uuid4()).upper()
