@@ -13,7 +13,8 @@ headers = {
 }
 
 # generate uuid: str(uuid.uuid4()).upper()
-# generate auth: user_login() or user_register() or get by network tools like Fiddler
+# generate auth:
+#   user_login() or user_register() or get by network tools like Fiddler
 static_uuid = '41EA0069-AED7-4902-BF82-1E03793146A7'
 auth_str = ''
 headers['Authorization'] = auth_str
@@ -23,7 +24,11 @@ print('auth_str: ' + auth_str)
 
 
 def calc_score(shiny_perfect_count, perfect_count, near_count, miss_count):
-    return int(10000000 / (perfect_count + near_count + miss_count) * (perfect_count + 0.5 * near_count) + shiny_perfect_count)
+    return int(
+        10000000 / (
+                perfect_count + near_count + miss_count
+            ) * (perfect_count + 0.5 * near_count) + shiny_perfect_count
+        )
 
 
 def char_upgrade(character):
@@ -77,7 +82,8 @@ def char_awaken(character):
 def friend_add(friend_code):
     '''
     usage:
-        friend_code: the 9-digit code of the user that you want to add as a friend
+        friend_code:
+            the 9-digit code of the user that you want to add as a friend
         by adding a friend you may check his/her best30 data via rank_friend
     example:
         friend_add(114514810)
@@ -165,7 +171,8 @@ def frag_friend_slot():
     attention:
         be aware of getting banned for frequent/excessive use of this api
     usage:
-        run directly to get you a friend slot (if possible) without costing your fragments
+        run directly to get you a friend slot
+        (if possible) without costing your fragments
     '''
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
@@ -182,7 +189,8 @@ def frag_stamina():
     attention:
         be aware of getting banned for frequent/excessive use of this api
     usage:
-        run directly to get you 6 stamina (if possible) without costing your fragments
+        run directly to get you 6 stamina
+        (if possible) without costing your fragments
     return:
         {
             "success": true,
@@ -324,7 +332,9 @@ def get_world_map():
     return (get_world_map_json)
 
 
-def get_world_token(song_id, difficulty, select_session_uuid=str(uuid.uuid4()).upper(), stamina_multiply=0, fragment_multiply=0):
+def get_world_token(
+        song_id, difficulty, select_session_uuid=str(uuid.uuid4()).upper(),
+        stamina_multiply=0, fragment_multiply=0):
     '''
     attention:
         you must be in a map before getting token from map
@@ -332,8 +342,10 @@ def get_world_token(song_id, difficulty, select_session_uuid=str(uuid.uuid4()).u
     usage:
         song_id: please check song_id.json
         difficulty: 0=pst, 1=prs, 2=ftr
-        stamina_multiply: (not used (0) by default) available in legacy maps, 2=2x, 4=4x, 6=6x
-        fragment_multiply: (not used (0) by default) available in legacy maps, 100=1.0x, 110=1.1x, 125=1.25x, 150=1.5x
+        stamina_multiply: (not used (0) by default) available in legacy maps,
+        ex) 2=2x, 4=4x, 6=6x
+        fragment_multiply: (not used (0) by default) available in legacy maps,
+        ex) 100=1.0x, 110=1.1x, 125=1.25x, 150=1.5x
         select_session_uuid: a uuid
     example:
         get_world_token('fairytale', 0, str(uuid.uuid4()).upper(), 4, 150)
@@ -370,7 +382,11 @@ def get_world_token(song_id, difficulty, select_session_uuid=str(uuid.uuid4()).u
     return (world_token_json)
 
 
-def post_score(song_token, song_hash, song_id, difficulty, score, shiny_perfect_count, perfect_count, near_count, miss_count, health, modifier, submission_hash):
+def post_score(
+        song_token, song_hash, song_id,
+        difficulty, score,
+        shiny_perfect_count, perfect_count, near_count, miss_count,
+        health, modifier, submission_hash):
     '''
     usage:
         song_token: get it from get_world_token() or get_score_token()
@@ -380,7 +396,11 @@ def post_score(song_token, song_hash, song_id, difficulty, score, shiny_perfect_
         score: the total score
         submission_hash: the submission hash
     example:
-        post_score(song_token, song_hash, 'rise', 2, calc_score(...), 724, 776, 3, 9, 100, 0, submission_hash)
+        post_score(
+            song_token, song_hash, 'rise',
+            2, calc_score(...),
+            724, 776, 3, 9,
+            100, 0, submission_hash)
     return:
     '''
 
@@ -624,12 +644,16 @@ def user_info():
 def user_login(name, password, add_auth=True, change_device_id=False):
     '''
     attention:
-        your account will be banned for a while if it is logged into more than 2 devices of different uuid
+        your account will be banned for a while
+        if it is logged into more than 2 devices of different uuid
     usage:
         name: username
         password: password
-        add_auth: whether to use the (new) authorization code for following functions
-        change_device_id: whether to change (and use) a new device id instead of using default device id
+        add_auth:
+            whether to use the (new) authorization code for following functions
+        change_device_id:
+            whether to change (and use) a new device id
+            instead of using default device id
     example:
         user_login('tester2234', 'tester223344')
     '''
@@ -641,7 +665,9 @@ def user_login(name, password, add_auth=True, change_device_id=False):
         static_uuid = headers['DeviceId']
         print('new_uuid: ' + static_uuid)
     headers['Authorization'] = 'Basic ' + str(base64.b64encode(
-        (login_cred['name'] + ':' + login_cred['password']).encode('utf-8')), 'utf-8')
+        (login_cred['name'] + ':' + login_cred['password']).encode('utf-8')),
+            'utf-8'
+        )
     login_url = 'https://arcapi.lowiro.com/5/auth/login'
 
     login_response = requests.post(login_url, headers=headers, data=login_data)
@@ -661,15 +687,21 @@ def user_login(name, password, add_auth=True, change_device_id=False):
     return (login_json)
 
 
-def user_register(name, password, email, add_auth=True, platform='ios', change_device_id=True):
+def user_register(
+        name, password, email, add_auth=True,
+        platform='ios', change_device_id=True):
     '''
     usage:
         name: username (maximum length: 15)
         password: password
         email: email address
-        add_auth: whether to use the (new) authorization code for following functions
+        add_auth:
+            whether to use the (new) authorization code
+            for following functions
         platform: 'ios' or 'android' (or 'web'?)
-        change_device_id: whether to change (and use) a new device id instead of using default device id
+        change_device_id:
+            whether to change (and use) a new device id
+            instead of using default device id
     example:
         user_register('holy616', '616isgod', 'love616forever@gmail.com')
     '''
