@@ -108,8 +108,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "viyella",
       "title_localized": {
@@ -146,8 +145,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "rise",
       "title_localized": {
@@ -183,8 +181,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "lucifer",
       "title_localized": {
@@ -221,8 +218,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "fairytale",
       "title_localized": {
@@ -258,8 +254,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "hearditsaid",
       "title_localized": {
@@ -296,8 +291,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "babaroque",
       "title_localized": {
@@ -334,8 +328,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "memoryfactory",
       "title_localized": {
@@ -372,8 +365,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "snowwhite",
       "title_localized": {
@@ -409,8 +401,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "relentless",
       "title_localized": {
@@ -447,8 +438,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "shadesoflight",
       "title_localized": {
@@ -485,8 +475,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "vexaria",
       "title_localized": {
@@ -522,8 +511,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "essenceoftwilight",
       "title_localized": {
@@ -561,8 +549,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "qualia",
       "title_localized": {
@@ -599,8 +586,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "pragmatism",
       "title_localized": {
@@ -638,8 +624,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "sheriruth",
       "title_localized": {
@@ -677,8 +662,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "lumia",
       "title_localized": {
@@ -751,13 +735,12 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "dandelion",
       "title_localized": {
         "en": "Dandelion"
-      }, 
+      },
       "artist": "Farhan",
       "bpm": "169",
       "bpm_base": 169,
@@ -788,8 +771,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "anokumene",
       "title_localized": {
@@ -829,8 +811,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "infinityheaven",
       "title_localized": {
@@ -866,8 +847,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "partyvinyl",
       "title_localized": {
@@ -904,8 +884,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "flashback",
       "title_localized": {
@@ -942,8 +921,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "flyburg",
       "title_localized": {
@@ -981,8 +959,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "nirvluce",
       "title_localized": {
@@ -1019,8 +996,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "paradise",
       "title_localized": {
@@ -1057,8 +1033,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "brandnewworld",
       "title_localized": {
@@ -1094,8 +1069,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "dataerror",
       "title_localized": {
@@ -1133,8 +1107,7 @@
           "plusFingers": true
         }
       ]
-    }
-    ,
+    },
     {
       "id": "crosssoul",
       "title_localized": {
@@ -1171,8 +1144,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "yourvoiceso",
       "title_localized": {
@@ -1209,8 +1181,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "chronostasis",
       "title_localized": {
@@ -1246,8 +1217,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "kanagawa",
       "title_localized": {
@@ -1285,8 +1255,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "moonlightofsandcastle",
       "title_localized": {
@@ -1327,8 +1296,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "reconstruction",
       "title_localized": {
@@ -1369,8 +1337,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "evoltex",
       "title_localized": {
@@ -1410,8 +1377,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "oracle",
       "title_localized": {
@@ -1452,8 +1418,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "aterlbus",
       "title_localized": {
@@ -1496,8 +1461,7 @@
           "bg": "aterlbus"
         }
       ]
-    }
-    ,
+    },
     {
       "id": "clotho",
       "title_localized": {
@@ -1534,8 +1498,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "impurebird",
       "title_localized": {
@@ -1573,8 +1536,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "ignotus",
       "title_localized": {
@@ -1611,8 +1573,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "lethaeus",
       "title_localized": {
@@ -1649,8 +1610,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "romancewars",
       "title_localized": {
@@ -1688,8 +1648,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "blossoms",
       "title_localized": {
@@ -1726,8 +1685,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "moonheart",
       "title_localized": {
@@ -1764,8 +1722,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "genesis",
       "title_localized": {
@@ -1802,8 +1759,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "harutopia",
       "title_localized": {
@@ -1841,8 +1797,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "auxesia",
       "title_localized": {
@@ -1879,8 +1834,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "rabbitintheblackroom",
       "title_localized": {
@@ -1917,8 +1871,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "modelista",
       "title_localized": {
@@ -1955,8 +1908,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "soundwitch",
       "title_localized": {
@@ -1993,8 +1945,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "trappola",
       "title_localized": {
@@ -2032,8 +1983,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "iconoclast",
       "title_localized": {
@@ -2070,8 +2020,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "conflict",
       "title_localized": {
@@ -2108,8 +2057,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "axiumcrisis",
       "title_localized": {
@@ -2147,8 +2095,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "grievouslady",
       "title_localized": {
@@ -2187,8 +2134,7 @@
           "plusFingers": true
         }
       ]
-    }
-    ,
+    },
     {
       "id": "dreaminattraction",
       "title_localized": {
@@ -2225,8 +2171,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "redandblue",
       "title_localized": {
@@ -2263,8 +2208,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "onelastdrive",
       "title_localized": {
@@ -2300,8 +2244,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "surrender",
       "title_localized": {
@@ -2342,8 +2285,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "yozakurafubuki",
       "title_localized": {
@@ -2381,8 +2323,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "cyanine",
       "title_localized": {
@@ -2423,8 +2364,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "dreamgoeson",
       "title_localized": {
@@ -2465,8 +2405,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "journey",
       "title_localized": {
@@ -2507,8 +2446,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "specta",
       "title_localized": {
@@ -2549,8 +2487,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "quon",
       "title_localized": {
@@ -2587,8 +2524,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "syro",
       "title_localized": {
@@ -2625,8 +2561,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "reinvent",
       "title_localized": {
@@ -2662,8 +2597,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "silentrush",
       "title_localized": {
@@ -2700,8 +2634,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "singularity",
       "title_localized": {
@@ -2738,8 +2671,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "memoryforest",
       "title_localized": {
@@ -2776,8 +2708,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "strongholds",
       "title_localized": {
@@ -2814,8 +2745,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "nexttoyou",
       "title_localized": {
@@ -2852,8 +2782,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "metallicpunisher",
       "title_localized": {
@@ -2890,8 +2819,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "blaster",
       "title_localized": {
@@ -2929,8 +2857,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "guardina",
       "title_localized": {
@@ -2971,8 +2898,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "carminescythe",
       "title_localized": {
@@ -3009,8 +2935,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "bethere",
       "title_localized": {
@@ -3047,8 +2972,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "cyberneciacatharsis",
       "title_localized": {
@@ -3085,8 +3009,7 @@
           "rating": 9
         }
       ]
-    }
-        ,
+    },
     {
       "id": "callmyname",
       "title_localized": {
@@ -3123,8 +3046,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "inkarusi",
       "title_localized": {
@@ -3160,8 +3082,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "mazenine",
       "title_localized": {
@@ -3197,10 +3118,9 @@
           "chartDesigner": "小東星",
           "jacketDesigner": "アリスシャッハと魔法の楽団",
           "rating": 8
-          }
+        }
       ]
-    }
-    ,
+    },
     {
       "id": "themessage",
       "title_localized": {
@@ -3237,8 +3157,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "sulfur",
       "title_localized": {
@@ -3275,8 +3194,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "halcyon",
       "title_localized": {
@@ -3313,8 +3231,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "etherstrike",
       "title_localized": {
@@ -3353,8 +3270,7 @@
           "plusFingers": true
         }
       ]
-    }
-    ,
+    },
     {
       "id": "fractureray",
       "title_localized": {
@@ -3393,8 +3309,7 @@
           "plusFingers": true
         }
       ]
-    }
-    ,
+    },
     {
       "id": "suomi",
       "title_localized": {
@@ -3431,8 +3346,7 @@
           "rating": 7
         }
       ]
-    }
-    ,
+    },
     {
       "id": "bookmaker",
       "title_localized": {
@@ -3469,8 +3383,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "darakunosono",
       "title_localized": {
@@ -3508,8 +3421,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "dropdead",
       "title_localized": {
@@ -3546,8 +3458,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "fallensquare",
       "title_localized": {
@@ -3584,8 +3495,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "nhelv",
       "title_localized": {
@@ -3622,8 +3532,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "espebranch",
       "title_localized": {
@@ -3661,8 +3570,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "purgatorium",
       "title_localized": {
@@ -3698,8 +3606,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "hikari",
       "title_localized": {
@@ -3740,8 +3647,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "stager",
       "title_localized": {
@@ -3783,8 +3689,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "hallofmirrors",
       "title_localized": {
@@ -3824,8 +3729,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "linearaccelerator",
       "title_localized": {
@@ -3865,8 +3769,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "tiferet",
       "title_localized": {
@@ -3892,7 +3795,6 @@
           "chartDesigner": "夜浪[Spherical]",
           "jacketDesigner": "",
           "rating": 4
-
         },
         {
           "ratingClass": 1,
@@ -3907,8 +3809,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "alexandrite",
       "title_localized": {
@@ -3931,7 +3832,6 @@
           "chartDesigner": "東星※空の宝石",
           "jacketDesigner": "シエラ",
           "rating": 4
-
         },
         {
           "ratingClass": 1,
@@ -3945,10 +3845,8 @@
           "jacketDesigner": "シエラ",
           "rating": 9
         }
-
       ]
-    }
-    ,
+    },
     {
       "id": "rugie",
       "title_localized": {
@@ -3985,8 +3883,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "astraltale",
       "title_localized": {
@@ -4024,8 +3921,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "phantasia",
       "title_localized": {
@@ -4063,8 +3959,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "empireofwinter",
       "title_localized": {
@@ -4102,8 +3997,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "merlin",
       "title_localized": {
@@ -4146,8 +4040,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "dxfullmetal",
       "title_localized": {
@@ -4191,8 +4084,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "omakeno",
       "title_localized": {
@@ -4235,8 +4127,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "scarletlance",
       "title_localized": {
@@ -4279,8 +4170,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "ouroboros",
       "title_localized": {
@@ -4323,8 +4213,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "libertas",
       "title_localized": {
@@ -4362,8 +4251,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "solitarydream",
       "title_localized": {
@@ -4391,7 +4279,6 @@
           "chartDesigner": "",
           "jacketDesigner": "シエラ",
           "rating": 4
-
         },
         {
           "ratingClass": 1,
@@ -4406,8 +4293,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "antithese",
       "title_localized": {
@@ -4445,8 +4331,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "corruption",
       "title_localized": {
@@ -4484,8 +4369,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "blackterritory",
       "title_localized": {
@@ -4523,8 +4407,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "viciousheroism",
       "title_localized": {
@@ -4562,8 +4445,7 @@
           "rating": 9
         }
       ]
-    }
-    ,
+    },
     {
       "id": "cyaegha",
       "title_localized": {
@@ -4601,8 +4483,7 @@
           "rating": 10
         }
       ]
-    }
-    ,
+    },
     {
       "id": "revixy",
       "title_localized": {
@@ -4639,8 +4520,7 @@
           "rating": 8
         }
       ]
-    }
-    ,
+    },
     {
       "id": "grimheart",
       "title_localized": {
