@@ -666,8 +666,8 @@ def user_login(name, password, add_auth=True, change_device_id=False):
         print('new_uuid: ' + static_uuid)
     headers['Authorization'] = 'Basic ' + str(base64.b64encode(
         (login_cred['name'] + ':' + login_cred['password']).encode('utf-8')),
-            'utf-8'
-        )
+        'utf-8'
+    )
     login_url = 'https://arcapi.lowiro.com/5/auth/login'
 
     login_response = requests.post(login_url, headers=headers, data=login_data)
