@@ -102,11 +102,11 @@ def character_file_write():
 def user_info_file_write():
     if not os.path.isdir("./"+user_name):
         os.mkdir("./"+user_name)
-    with open('./k3id/user.json','w' ) as user_fw:
+    with open('./'+user_name+'/user.json','w' ) as user_fw:
         json.dump(arc.user_info(), user_fw)
 
 def map_file_write():
     if not os.path.isdir("./"+user_name):
         os.mkdir("./"+user_name)
-    with open('./k3id/map.json','w' ) as map_fw:
+    with open('./'+user_name+'/map.json','w' ) as map_fw:
         json.dump(arc.get_world_map(), map_fw)
