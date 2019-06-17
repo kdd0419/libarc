@@ -130,3 +130,7 @@ __pycache__/libarc.cpython-37.pyc
 .vscode/settings.json
 __pycache__/libarc.cpython-36.pyc
 static_uuid.txt
+~$arcaea_result.xlsx
+map.json
+user.json
+character.json

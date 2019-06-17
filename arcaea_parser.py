@@ -2,6 +2,7 @@ import json
 import csv
 import libarc as arc
 from getpass import getpass
+import os
 
 user_name = input('input username > ')
 user_pw = getpass('input PW > ')
@@ -57,7 +58,11 @@ clear_mode = [
     'Full Recall', 'Pure Memory',
     'Track Complete (Easy Gauge)', 'Track Complete (Hard Gauge)']
 for i in range(len(song_info)*3):
-    score = arc.rank_me(song_info[i // 3]['id'], i % 3, 0, 0)['value']
+    score_json = arc.rank_me(song_info[i // 3]['id'], i % 3, 0, 0)
+    if score_json['success'] == False:
+        print(song_info[i // 3]['name'], diff[i % 3], ": failed")
+        continue
+    score = score_json['value']
     tmp_dic = {
         "song_name": song_info[i // 3]['name'], "difficulty": diff[i % 3],
         "level": song_info[i // 3]['level'][i % 3][0],
@@ -75,7 +80,9 @@ for i in range(len(song_info)*3):
             score[0]['score'], song_info[i // 3]['level'][i % 3][1])
         song_rlt.append(tmp_dic)
 
-with open('arcaea result.csv', 'w', newline="\n", encoding='utf-8') as csv_f:
+if not os.path.isdir("./"+user_name):
+    os.mkdir("./"+user_name)
+with open("./"+user_name+'/arcaea result.csv', 'w', newline="\n", encoding='utf-8') as csv_f:
     fieldnames = [
         'song_name', 'difficulty', 'level', 'detail level', 'score',
         'shiny_perfect_count', 'perfect_count', 'near_count',
@@ -84,3 +91,22 @@ with open('arcaea result.csv', 'w', newline="\n", encoding='utf-8') as csv_f:
     writer.writeheader()
     for song in song_rlt:
         writer.writerow(song)
+
+
+def character_file_write():
+    if not os.path.isdir("./"+user_name):
+        os.mkdir("./"+user_name)
+    with open('./'+user_name+'/character.json','w' ) as chara_fw:
+        json.dump(arc.get_character_info(), chara_fw)
+
+def user_info_file_write():
+    if not os.path.isdir("./"+user_name):
+        os.mkdir("./"+user_name)
+    with open('./k3id/user.json','w' ) as user_fw:
+        json.dump(arc.user_info(), user_fw)
+
+def map_file_write():
+    if not os.path.isdir("./"+user_name):
+        os.mkdir("./"+user_name)
+    with open('./k3id/map.json','w' ) as map_fw:
+        json.dump(arc.get_world_map(), map_fw)
