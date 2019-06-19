@@ -57,32 +57,46 @@ clear_mode = [
     'Track Lost', 'Track Complete (Normal Gauge)',
     'Full Recall', 'Pure Memory',
     'Track Complete (Easy Gauge)', 'Track Complete (Hard Gauge)']
+
 for i in range(len(song_info)*3):
     score_json = arc.rank_me(song_info[i // 3]['id'], i % 3, 0, 0)
-    if score_json['success'] == False:
+
+    if not score_json['success']:
         print(song_info[i // 3]['name'], diff[i % 3], ": failed")
         continue
+
     score = score_json['value']
+
     tmp_dic = {
         "song_name": song_info[i // 3]['name'], "difficulty": diff[i % 3],
         "level": song_info[i // 3]['level'][i % 3][0],
         "detail level": song_info[i // 3]['level'][i % 3][1]}
+
     if len(score) <= 0:
         song_rlt.append(tmp_dic)
+
     else:
         tmp_dic['best_clear_type'] = clear_mode[score[0]['best_clear_type']]
+
         row = [
             'score', 'shiny_perfect_count', 'perfect_count',
             'near_count', 'miss_count', 'rank']
+
         for r in row:
             tmp_dic[r] = score[0][r]
+
         tmp_dic['potential'] = pttCalc(
             score[0]['score'], song_info[i // 3]['level'][i % 3][1])
+
         song_rlt.append(tmp_dic)
 
 if not os.path.isdir("./"+user_name):
     os.mkdir("./"+user_name)
-with open("./"+user_name+'/arcaea result.csv', 'w', newline="\n", encoding='utf-8') as csv_f:
+
+with open(
+    "./"+user_name+'/arcaea result.csv', 'w', newline="\n", encoding='utf-8'
+        ) as csv_f:
+
     fieldnames = [
         'song_name', 'difficulty', 'level', 'detail level', 'score',
         'shiny_perfect_count', 'perfect_count', 'near_count',
@@ -96,17 +110,19 @@ with open("./"+user_name+'/arcaea result.csv', 'w', newline="\n", encoding='utf-
 def character_file_write():
     if not os.path.isdir("./"+user_name):
         os.mkdir("./"+user_name)
-    with open('./'+user_name+'/character.json','w' ) as chara_fw:
+    with open('./'+user_name+'/character.json', 'w') as chara_fw:
         json.dump(arc.get_character_info(), chara_fw)
+
 
 def user_info_file_write():
     if not os.path.isdir("./"+user_name):
         os.mkdir("./"+user_name)
-    with open('./'+user_name+'/user.json','w' ) as user_fw:
+    with open('./'+user_name+'/user.json', 'w') as user_fw:
         json.dump(arc.user_info(), user_fw)
+
 
 def map_file_write():
     if not os.path.isdir("./"+user_name):
         os.mkdir("./"+user_name)
-    with open('./'+user_name+'/map.json','w' ) as map_fw:
+    with open('./'+user_name+'/map.json', 'w') as map_fw:
         json.dump(arc.get_world_map(), map_fw)
