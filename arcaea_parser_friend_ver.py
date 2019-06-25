@@ -3,14 +3,10 @@ import csv
 import libarc as arc
 import os
 
-
-
 friend_code = input('input your friend-add code > ')
 
 with open('admin/login_info.json', 'r') as admin_f:
     admin = json.loads(admin_f.read())
-
-
 
 with open('static_uuid.txt', 'r') as fr:
     arc.headers['DeviceId'] = fr.readline().strip()
@@ -75,7 +71,9 @@ for i in range(len(song_info)*3):
     if not score_json['success']:
         print(song_info[i // 3]['name'], diff[i % 3], ": failed")
         continue
-    
+    else:
+        print(song_info[i // 3]['name'], diff[i % 3], ": successed")
+
     score = score_json['value']
 
     tmp_dic = {
