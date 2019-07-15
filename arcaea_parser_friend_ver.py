@@ -72,7 +72,7 @@ for i in range(len(song_info)*3):
         print(song_info[i // 3]['name'], diff[i % 3], ": failed")
         continue
     else:
-        print(song_info[i // 3]['name'], diff[i % 3], ": successed")
+        print(song_info[i // 3]['name'], diff[i % 3], ": success")
 
     score = score_json['value']
 
