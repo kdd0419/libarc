@@ -2,11 +2,12 @@ import json
 import csv
 import libarc as arc
 import os
+import pickle
 
 friend_code = input('input your friend-add code > ')
 
-with open('admin/login_info.json', 'r') as admin_f:
-    admin = json.loads(admin_f.read())
+with open('login_info.pickle', 'rb') as pkf:
+    admin = pickle.load(pkf)
 
 with open('static_uuid.txt', 'r') as fr:
     arc.headers['DeviceId'] = fr.readline().strip()

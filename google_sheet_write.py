@@ -7,7 +7,7 @@ from google.auth.transport.requests import Request
 import json
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
 
 def main():
     creds = None
@@ -29,25 +29,30 @@ def main():
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
-    service = build('sheets', 'v4', credentials=creds)
+    sheet_service = build('sheets', 'v4', credentials=creds)
+    drive_service = build('drive', 'v3', credentials=creds)
 
     import arcaea_parser_friend_ver as arc_parse
-    
-    song_rlt_list = []
-    song_rlt_list.append(arc_parse.fieldnames)
-    for song in arc_parse.song_rlt:
-        song_rlt_list.append(list(song.values()))
-
-    sheet_append_body = {
-        "values" : song_rlt_list
-    }
 
     if os.path.exists("./"+arc_parse.user_name+'/sheet_create_rlt.json'):
         with open("./"+arc_parse.user_name+"/sheet_create_rlt.json", 'r') as f:
             response = json.load(f)
             spread_id = response['spreadsheetId']
             spread_url = response['spreadsheetUrl']
-        request = service.spreadsheets().values().clear(spreadsheetId=spread_id, range='Arcaea Score')
+
+        update_body = {
+            "requests": [
+                {
+                    "deleteBanding": {
+                        "bandedRangeId": 1
+                    }
+                }
+            ]
+        }
+        request = sheet_service.spreadsheets().batchUpdate(spreadsheetId=spread_id, body=update_body)
+        response = request.execute()
+
+        request = sheet_service.spreadsheets().values().clear(spreadsheetId=spread_id, range='Arcaea Score')
         response = request.execute()
     else:
         sheet_create_body = {
@@ -61,25 +66,89 @@ def main():
                     "properties" : {
                         "sheetId" : 0,
                         "title" : "Arcaea Score"
+                    },
+                    "basicFilter": {
+                        "range": {
+                            "sheetId": 0,
+                            "startRowIndex": 0,
+                            "endRowIndex": 1,
+                            "startColumnIndex": 0,
+                            "endColumnIndex": len(arc_parse.fieldnames)
+                        }
                     }
                 }
             ]
         }
-
-        request = service.spreadsheets().create(body=sheet_create_body)
+        request = sheet_service.spreadsheets().create(body=sheet_create_body)
         response = request.execute()
         spread_id = response['spreadsheetId']
         spread_url = response['spreadsheetUrl']
 
+        share_body = {
+            'type': 'anyone',
+            'role': 'writer'
+        }
+
+        drive_service.permissions().create(
+            fileId=spread_id,
+            body=share_body
+        ).execute()
+
         with open("./"+arc_parse.user_name+"/sheet_create_rlt.json", 'w') as f:
             json.dump(response, f)
-        
-    request = service.spreadsheets().values().append(spreadsheetId=spread_id, range='Arcaea Score!A1',
+
+    song_rlt_list = []
+    song_rlt_list.append(arc_parse.fieldnames)
+    for song in arc_parse.song_rlt:
+        song_rlt_list.append(list(song.values()))
+
+    sheet_append_body = {
+        "values" : song_rlt_list
+    }
+
+    request = sheet_service.spreadsheets().values().append(spreadsheetId=spread_id, range='Arcaea Score!A1',
         includeValuesInResponse=False, valueInputOption="USER_ENTERED", insertDataOption="OVERWRITE",
         body=sheet_append_body
     )
     response = request.execute()
-    print(response)
+    
+    update_body = {
+        "requests": [
+            {
+                "addBanding": {
+                    "bandedRange": {
+                        "bandedRangeId": 1,
+                        "range": {
+                            "sheetId": 0,
+                            "startRowIndex": 0,
+                            "endRowIndex": len(arc_parse.song_rlt) + 1,
+                            "startColumnIndex": 0,
+                            "endColumnIndex": len(arc_parse.fieldnames)
+                        },
+                        "rowProperties": {
+                            "headerColor": {
+                                "red": 150/255,
+                                "green": 255/255,
+                                "blue": 150/255
+                            },
+                            "firstBandColor": {
+                                "red": 255/255,
+                                "green": 255/255,
+                                "blue": 255/255
+                            },
+                            "secondBandColor": {
+                                "red": 220/255,
+                                "green": 255/255,
+                                "blue": 220/255
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+    request = sheet_service.spreadsheets().batchUpdate(spreadsheetId=spread_id, body=update_body)
+    response = request.execute()
 
     print(spread_url)
 
