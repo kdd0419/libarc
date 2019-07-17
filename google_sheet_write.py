@@ -1,4 +1,3 @@
-from __future__ import print_function
 import pickle
 import os.path
 from googleapiclient.discovery import build
@@ -7,7 +6,11 @@ from google.auth.transport.requests import Request
 import json
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
+SCOPES = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
+]
+
 
 def main():
     creds = None
@@ -40,58 +43,36 @@ def main():
             spread_id = response['spreadsheetId']
             spread_url = response['spreadsheetUrl']
 
-        update_body = {
-            "requests": [
-                {
-                    "deleteBanding": {
-                        "bandedRangeId": 1
-                    }
-                }
-            ]
-        }
-        request = sheet_service.spreadsheets().batchUpdate(spreadsheetId=spread_id, body=update_body)
-        response = request.execute()
+        sheet_service.spreadsheets().batchUpdate(
+            spreadsheetId=spread_id,
+            body={"requests": [{"deleteBanding": {"bandedRangeId": 1}}]}
+        ).execute()
 
-        request = sheet_service.spreadsheets().values().clear(spreadsheetId=spread_id, range='Arcaea Score')
-        response = request.execute()
+        sheet_service.spreadsheets().values().clear(
+            spreadsheetId=spread_id, range='Arcaea Score'
+        ).execute()
     else:
         sheet_create_body = {
-            "properties" : {
-                "title" : "arcaea_result_" + arc_parse.user_name,
-                "autoRecalc" : "ON_CHANGE",
-                "timeZone" : "GMT+09:00"
+            "properties": {
+                "title": "arcaea_result_" + arc_parse.user_name,
+                "autoRecalc": "ON_CHANGE",
+                "timeZone": "GMT+09:00"
             },
-            "sheets" : [
-                {
-                    "properties" : {
-                        "sheetId" : 0,
-                        "title" : "Arcaea Score"
-                    },
-                    "basicFilter": {
-                        "range": {
-                            "sheetId": 0,
-                            "startRowIndex": 0,
-                            "endRowIndex": 1,
-                            "startColumnIndex": 0,
-                            "endColumnIndex": len(arc_parse.fieldnames)
-                        }
-                    }
+            "sheets": [{
+                "properties": {
+                    "sheetId": 0,
+                    "title": "Arcaea Score"
                 }
-            ]
+            }]
         }
         request = sheet_service.spreadsheets().create(body=sheet_create_body)
         response = request.execute()
         spread_id = response['spreadsheetId']
         spread_url = response['spreadsheetUrl']
 
-        share_body = {
-            'type': 'anyone',
-            'role': 'writer'
-        }
-
         drive_service.permissions().create(
             fileId=spread_id,
-            body=share_body
+            body={'type': 'anyone', 'role': 'writer'}
         ).execute()
 
         with open("./"+arc_parse.user_name+"/sheet_create_rlt.json", 'w') as f:
@@ -102,16 +83,12 @@ def main():
     for song in arc_parse.song_rlt:
         song_rlt_list.append(list(song.values()))
 
-    sheet_append_body = {
-        "values" : song_rlt_list
-    }
+    sheet_service.spreadsheets().values().append(
+        spreadsheetId=spread_id, range='Arcaea Score!A1',
+        includeValuesInResponse=False, valueInputOption="USER_ENTERED",
+        insertDataOption="OVERWRITE", body={"values": song_rlt_list}
+    ).execute()
 
-    request = sheet_service.spreadsheets().values().append(spreadsheetId=spread_id, range='Arcaea Score!A1',
-        includeValuesInResponse=False, valueInputOption="USER_ENTERED", insertDataOption="OVERWRITE",
-        body=sheet_append_body
-    )
-    response = request.execute()
-    
     update_body = {
         "requests": [
             {
@@ -144,11 +121,25 @@ def main():
                         }
                     }
                 }
+            },
+            {
+                "setBasicFilter": {
+                    "filter": {
+                        "range": {
+                            "sheetId": 0,
+                            "startRowIndex": 0,
+                            "endRowIndex": len(arc_parse.song_rlt) + 1,
+                            "startColumnIndex": 0,
+                            "endColumnIndex": len(arc_parse.fieldnames)
+                        }
+                    }
+                }
             }
         ]
     }
-    request = sheet_service.spreadsheets().batchUpdate(spreadsheetId=spread_id, body=update_body)
-    response = request.execute()
+    sheet_service.spreadsheets().batchUpdate(
+        spreadsheetId=spread_id, body=update_body
+    ).execute()
 
     print(spread_url)
 
