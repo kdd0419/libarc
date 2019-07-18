@@ -11,7 +11,7 @@ def admin_login():
     return admin
 
 
-def set_uuid():
+def set_uuid_into_file():
     with open('static_uuid.txt', 'w') as fw:
         import uuid
         arc.headers['DeviceId'] = str(uuid.uuid4()).upper()
@@ -19,7 +19,7 @@ def set_uuid():
         fw.write(arc.static_uuid)
 
 
-def get_uuid():
+def get_uuid_from_file():
     with open('static_uuid.txt', 'r') as fr:
         arc.headers['DeviceId'] = fr.readline().strip()
         arc.static_uuid = arc.headers['DeviceId']
@@ -34,7 +34,7 @@ def admin_del_all_friends(admin):
         arc.friend_del(friend['user_id'])
 
 
-def get_user_name(friend_code): # include admin add friend
+def get_user_name(friend_code):  # include admin add friend
     add_rlt = arc.friend_add(friend_code)
     user_name = add_rlt['value']['friends'][0]['name']
     return user_name
@@ -134,7 +134,7 @@ def score_file_write(score, user_name):
         "./"+user_name+'/arcaea result.csv', 'w',
         newline="\n", encoding='utf-8'
             ) as csv_f:
-        
+
         writer = csv.DictWriter(csv_f, fieldnames=fieldnames)
         writer.writeheader()
         for song in score:
@@ -143,9 +143,9 @@ def score_file_write(score, user_name):
 
 def main():
     if os.path.exists('./static_uuid.txt'):
-        get_uuid()
+        get_uuid_from_file()
     else:
-        set_uuid()
+        set_uuid_into_file()
 
     admin = admin_login()
     admin_del_all_friends(admin=admin)

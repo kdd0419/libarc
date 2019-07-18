@@ -141,15 +141,16 @@ def write_sheet(sheet_service, spread_id, all_score):
         insertDataOption="OVERWRITE", body={"values": all_score}
     ).execute()
 
+
 def set_sheet_info_file(response, user_name):
-    if not os.path.isdir("./"+user_name):
-        os.mkdir("./"+user_name)
-    with open("./"+user_name+"/sheet_create_rlt.json", 'w') as f:
+    if not os.path.isdir("./spread_sheet"):
+        os.mkdir("./spread_sheet")
+    with open("./spread_sheet/"+user_name+"_sheet_create_rlt.json", 'w') as f:
         json.dump(response, f)
 
 
 def get_sheet_info_file(user_name):
-    with open("./"+user_name+"/sheet_create_rlt.json", 'r') as f:
+    with open("./spread_sheet/"+user_name+"_sheet_create_rlt.json", 'r') as f:
         return json.load(f)
 
 
@@ -160,9 +161,9 @@ def main():
     drive_service = build('drive', 'v3', credentials=creds)
 
     if os.path.exists('./static_uuid.txt'):
-        arc_parse.get_uuid()
+        arc_parse.get_uuid_from_file()
     else:
-        arc_parse.set_uuid()
+        arc_parse.set_uuid_into_file()
 
     admin = arc_parse.admin_login()
     arc_parse.admin_del_all_friends(admin)
@@ -171,7 +172,7 @@ def main():
     all_score = getArcScore()
     arc_parse.admin_del_all_friends(admin)
 
-    if os.path.exists("./"+user_name+'/sheet_create_rlt.json'):
+    if os.path.exists("./spread_sheet/"+user_name+'_sheet_create_rlt.json'):
         response = get_sheet_info_file(user_name)
         spread_id = response['spreadsheetId']
         spread_url = response['spreadsheetUrl']
@@ -184,7 +185,7 @@ def main():
         set_sheet_info_file(response, user_name)
 
         set_share_sheet(drive_service, spread_id)
-    
+
     write_sheet(sheet_service, spread_id, all_score)
     update_sheet(sheet_service, spread_id, len(all_score))
     print(spread_url)

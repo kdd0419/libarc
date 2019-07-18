@@ -3,7 +3,7 @@ import libarc as arc
 import os
 
 
-def set_uuid():
+def set_uuid_into_file():
     with open('static_uuid.txt', 'w') as fw:
         import uuid
         arc.headers['DeviceId'] = str(uuid.uuid4()).upper()
@@ -11,7 +11,7 @@ def set_uuid():
         fw.write(arc.static_uuid)
 
 
-def get_uuid():
+def get_uuid_from_file():
     with open('static_uuid.txt', 'r') as fr:
         arc.headers['DeviceId'] = fr.readline().strip()
         arc.static_uuid = arc.headers['DeviceId']
@@ -149,9 +149,9 @@ def map_file_write(user_name):
 
 def main():
     if os.path.exists('./static_uuid.txt'):
-        get_uuid()
+        get_uuid_from_file()
     else:
-        set_uuid()
+        set_uuid_into_file()
 
     login()
 
