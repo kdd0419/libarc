@@ -1,22 +1,31 @@
 import json
-import csv
 import libarc as arc
 import os
-import pickle
-
-friend_code = input('input your friend-add code > ')
-
-with open('login_info.pickle', 'rb') as pkf:
-    admin = pickle.load(pkf)
-
-with open('static_uuid.txt', 'r') as fr:
-    arc.headers['DeviceId'] = fr.readline().strip()
-    arc.static_uuid = arc.headers['DeviceId']    
-
-arc.user_login(admin['id'], admin['pw'], change_device_id=False)
 
 
-def admin_del_all_friends():
+def admin_login():
+    import pickle
+    with open('login_info.pickle', 'rb') as pkf:
+        admin = pickle.load(pkf)
+    arc.user_login(admin['id'], admin['pw'], change_device_id=False)
+    return admin
+
+
+def set_uuid():
+    with open('static_uuid.txt', 'w') as fw:
+        import uuid
+        arc.headers['DeviceId'] = str(uuid.uuid4()).upper()
+        arc.static_uuid = arc.headers['DeviceId']
+        fw.write(arc.static_uuid)
+
+
+def get_uuid():
+    with open('static_uuid.txt', 'r') as fr:
+        arc.headers['DeviceId'] = fr.readline().strip()
+        arc.static_uuid = arc.headers['DeviceId']
+
+
+def admin_del_all_friends(admin):
     user_info_json = arc.user_info()
     if user_info_json['value'][0]['value']['name'] != admin['id']:
         return
@@ -24,25 +33,31 @@ def admin_del_all_friends():
     for friend in friends:
         arc.friend_del(friend['user_id'])
 
-admin_del_all_friends()
 
-add_rlt = arc.friend_add(friend_code)
-user_name=add_rlt['value']['friends'][0]['name']
+def get_user_name(friend_code): # include admin add friend
+    add_rlt = arc.friend_add(friend_code)
+    user_name = add_rlt['value']['friends'][0]['name']
+    return user_name
 
-with open('./ArcSonglist.json', 'r', encoding="utf-8") as songlist_f:
-    songlist = json.loads(songlist_f.read())
 
-songlist = songlist['songs']
+def get_songinfo():
+    with open('./ArcSonglist.json', 'r', encoding="utf-8") as songlist_f:
+        songlist = json.loads(songlist_f.read())
 
-song_info = []
-for song in songlist:
-    song_info.append({
-        'id': song['id'], 'name': song['title_localized']['en'],
-        'level': [
-                [diff['rating'], diff['fixedValue']]
-                for diff in song['difficulties']
-            ]
-        })
+    songlist = songlist['songs']
+
+    song_info = []
+    for song in songlist:
+        song_info.append({
+            'id': song['id'], 'name': song['title_localized']['en'],
+            'level': [
+                    [diff['rating'], diff['fixedValue']]
+                    for diff in song['difficulties']
+                ]
+            })
+
+    return song_info
+
 
 def pttCalc(score, fixedValue):
     if score <= 9800000:
@@ -59,59 +74,90 @@ def pttCalc(score, fixedValue):
         ptt = 0
     return ptt
 
-song_rlt = []
 diff = ['PAST', 'PRESENT', 'FUTURE']
 clear_mode = [
     'Track Lost', 'Track Complete (Normal Gauge)',
     'Full Recall', 'Pure Memory',
     'Track Complete (Easy Gauge)', 'Track Complete (Hard Gauge)']
 
-for i in range(len(song_info)*3):
-    score_json = arc.rank_friend(song_info[i // 3]['id'], i % 3, 0, 1)
 
-    if not score_json['success']:
-        print(song_info[i // 3]['name'], diff[i % 3], ": failed")
-        continue
+def get_all_score(song_info):
+    rlt = []
+    for i in range(len(song_info)*3):
+        score_json = arc.rank_friend(song_info[i // 3]['id'], i % 3, 0, 1)
+
+        if not score_json['success']:
+            print(song_info[i // 3]['name'], diff[i % 3], ": failed")
+            continue
+        else:
+            print(song_info[i // 3]['name'], diff[i % 3], ": success")
+
+        score = score_json['value']
+
+        tmp_dic = {
+            "song_name": song_info[i // 3]['name'], "difficulty": diff[i % 3],
+            "level": song_info[i // 3]['level'][i % 3][0],
+            "detail level": song_info[i // 3]['level'][i % 3][1]}
+
+        if len(score) <= 0:
+            rlt.append(tmp_dic)
+
+        else:
+            tmp_dic['best_clear_type'] = clear_mode[
+                score[0]['best_clear_type']]
+
+            row = [
+                'score', 'shiny_perfect_count', 'perfect_count',
+                'near_count', 'miss_count']
+
+            for r in row:
+                tmp_dic[r] = score[0][r]
+
+            tmp_dic['potential'] = pttCalc(
+                score[0]['score'], song_info[i // 3]['level'][i % 3][1])
+
+            rlt.append(tmp_dic)
+    return rlt
+
+fieldnames = [
+    'song_name', 'difficulty', 'level', 'detail level', 'score',
+    'shiny_perfect_count', 'perfect_count', 'near_count',
+    'miss_count', 'best_clear_type', 'potential']
+
+
+def score_file_write(score, user_name):
+    import csv
+    if not os.path.isdir("./"+user_name):
+        os.mkdir("./"+user_name)
+
+    with open(
+        "./"+user_name+'/arcaea result.csv', 'w',
+        newline="\n", encoding='utf-8'
+            ) as csv_f:
+        
+        writer = csv.DictWriter(csv_f, fieldnames=fieldnames)
+        writer.writeheader()
+        for song in score:
+            writer.writerow(song)
+
+
+def main():
+    if os.path.exists('./static_uuid.txt'):
+        get_uuid()
     else:
-        print(song_info[i // 3]['name'], diff[i % 3], ": success")
+        set_uuid()
 
-    score = score_json['value']
+    admin = admin_login()
+    admin_del_all_friends(admin=admin)
 
-    tmp_dic = {
-        "song_name": song_info[i // 3]['name'], "difficulty": diff[i % 3],
-        "level": song_info[i // 3]['level'][i % 3][0],
-        "detail level": song_info[i // 3]['level'][i % 3][1]}
+    user_name = get_user_name(
+        friend_code=input('input your friend-add code > '))
 
-    if len(score) <= 0:
-        song_rlt.append(tmp_dic)
+    all_score = get_all_score(song_info=get_songinfo())
 
-    else:
-        tmp_dic['best_clear_type'] = clear_mode[score[0]['best_clear_type']]
+    score_file_write(score=all_score, user_name=user_name)
 
-        row = [
-            'score', 'shiny_perfect_count', 'perfect_count',
-            'near_count', 'miss_count']
+    admin_del_all_friends(admin=admin)
 
-        for r in row:
-            tmp_dic[r] = score[0][r]
-
-        tmp_dic['potential'] = pttCalc(
-            score[0]['score'], song_info[i // 3]['level'][i % 3][1])
-
-        song_rlt.append(tmp_dic)
-
-if not os.path.isdir("./"+user_name):
-    os.mkdir("./"+user_name)
-
-with open(
-    "./"+user_name+'/arcaea result.csv', 'w', newline="\n", encoding='utf-8'
-        ) as csv_f:
-
-    fieldnames = [
-        'song_name', 'difficulty', 'level', 'detail level', 'score',
-        'shiny_perfect_count', 'perfect_count', 'near_count',
-        'miss_count', 'best_clear_type', 'potential']
-    writer = csv.DictWriter(csv_f, fieldnames=fieldnames)
-    writer.writeheader()
-    for song in song_rlt:
-        writer.writerow(song)
+if __name__ == "__main__":
+    main()

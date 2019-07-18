@@ -5174,6 +5174,121 @@
                     "fixedValue": 10.6
                 }
             ]
+        },
+        {
+            "id": "vindication",
+            "title_localized": {
+                "en": "Vindication"
+            },
+            "difficulties": [
+                {
+                    "ratingClass": 0,
+                    "rating": 4,
+                    "fixedValue": 4
+                },
+                {
+                    "ratingClass": 1,
+                    "rating": 6,
+                    "fixedValue": 6
+                },
+                {
+                    "ratingClass": 2,
+                    "rating": 9,
+                    "fixedValue": 9.6
+                }
+            ]
+        },
+        {
+            "id": "heavensdoor",
+            "title_localized": {
+                "en": "Heavensdoor"
+            },
+            "difficulties": [
+                {
+                    "ratingClass": 0,
+                    "rating": 4,
+                    "fixedValue": 4
+                },
+                {
+                    "ratingClass": 1,
+                    "rating": 7,
+                    "fixedValue": 7.4
+                },
+                {
+                    "ratingClass": 2,
+                    "rating": 9,
+                    "fixedValue": 10
+                }
+            ]
+        },
+        {
+            "id": "particlearts",
+            "title_localized": {
+                "en": "Particle Arts"
+            },
+            "difficulties": [
+                {
+                    "ratingClass": 0,
+                    "rating": 3,
+                    "fixedValue": 3
+                },
+                {
+                    "ratingClass": 1,
+                    "rating": 6,
+                    "fixedValue": 6
+                },
+                {
+                    "ratingClass": 2,
+                    "rating": 8,
+                    "fixedValue": 8.8
+                }
+            ]
+        },
+        {
+            "id": "ringedgenesis",
+            "title_localized": {
+                "en": "Ringed Genensis"
+            },
+            "difficulties": [
+                {
+                    "ratingClass": 0,
+                    "rating": 5,
+                    "fixedValue": 5
+                },
+                {
+                    "ratingClass": 1,
+                    "rating": 8,
+                    "fixedValue": 8.5
+                },
+                {
+                    "ratingClass": 2,
+                    "rating": 10,
+                    "fixedValue": 10.7
+                }
+            ]
+        },
+        {
+            "id": "dreadnought",
+            "title_localized": {
+                "en": "Dreadnought"
+            },
+            "difficulties": [
+                {
+                    "ratingClass": 0,
+                    "rating": 4,
+                    "fixedValue": 4
+                },
+                {
+                    "ratingClass": 1,
+                    "rating": 7,
+                    "fixedValue": 7.3
+                },
+                {
+                    "ratingClass": 2,
+                    "rating": 9,
+                    "fixedValue": 9.7
+                }
+            ]
         }
     ]
 }
