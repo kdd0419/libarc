@@ -50,7 +50,8 @@ def char_upgrade(character, rlt_print=False):
 
     char_upgrade_response = requests.post(char_upgrade_url, headers=headers)
     char_upgrade_json = json.loads(char_upgrade_response.content)
-    if rlt_print: print(json.dumps(char_upgrade_json, indent=4))
+    if rlt_print:
+        print(json.dumps(char_upgrade_json, indent=4))
 
     return (char_upgrade_json)
 
@@ -74,7 +75,8 @@ def char_awaken(character, rlt_print=False):
 
     char_awaken_response = requests.post(char_awaken_url, headers=headers)
     char_awaken_json = json.loads(char_awaken_response.content)
-    if rlt_print: print(json.dumps(char_awaken_json, indent=4))
+    if rlt_print:
+        print(json.dumps(char_awaken_json, indent=4))
 
     return (char_awaken_json)
 
@@ -134,7 +136,8 @@ def friend_add(friend_code, rlt_print=False):
     friend_add_response = requests.post(
         friend_add_url, headers=headers, data=friend_add_data)
     friend_add_json = json.loads(friend_add_response.content)
-    if rlt_print: print(json.dumps(friend_add_json, indent=4))
+    if rlt_print:
+        print(json.dumps(friend_add_json, indent=4))
 
     return (friend_add_json)
 
@@ -161,7 +164,8 @@ def friend_del(friend_id, rlt_print=False):
     friend_del_response = requests.post(
         friend_del_url, headers=headers, data=friend_del_data)
     friend_del_json = json.loads(friend_del_response.content)
-    if rlt_print: print(json.dumps(friend_del_json, indent=4))
+    if rlt_print:
+        print(json.dumps(friend_del_json, indent=4))
 
     return (friend_del_json)
 
@@ -179,7 +183,8 @@ def frag_friend_slot(rlt_print=False):
     friend_slot_url = 'https://arcapi.lowiro.com/5/purchase/me/friend/fragment'
     friend_slot_response = requests.post(friend_slot_url, headers=headers)
     friend_slot_json = json.loads(friend_slot_response.content)
-    if rlt_print: print(json.dumps(friend_slot_json, indent=4))
+    if rlt_print:
+        print(json.dumps(friend_slot_json, indent=4))
 
     return (friend_slot_json)
 
@@ -207,7 +212,8 @@ def frag_stamina(rlt_print=False):
     stamina_url = 'https://arcapi.lowiro.com/5/purchase/me/stamina/fragment'
     stamina_response = requests.post(stamina_url, headers=headers)
     stamina_json = json.loads(stamina_response.content)
-    if rlt_print: print(json.dumps(stamina_json, indent=4))
+    if rlt_print:
+        print(json.dumps(stamina_json, indent=4))
 
     return (stamina_json)
 
@@ -282,7 +288,8 @@ def get_character_info(rlt_print=False):
     get_character_info_response = requests.get(
         get_character_info_url, headers=headers)
     get_character_info_json = json.loads(get_character_info_response.content)
-    if rlt_print: print(json.dumps(get_character_info_json, indent=4))
+    if rlt_print:
+        print(json.dumps(get_character_info_json, indent=4))
 
     return (get_character_info_json)
 
@@ -308,7 +315,8 @@ def get_score_token(rlt_print=False):
     get_score_token_response = requests.get(
         get_score_token_url, headers=headers)
     get_score_token_json = json.loads(get_score_token_response.content)
-    if rlt_print: print(json.dumps(get_score_token_json, indent=4))
+    if rlt_print:
+        print(json.dumps(get_score_token_json, indent=4))
 
     return (get_score_token_json)
 
@@ -327,7 +335,8 @@ def get_world_map(rlt_print=False):
 
     get_world_map_response = requests.get(get_world_map_url, headers=headers)
     get_world_map_json = json.loads(get_world_map_response.content)
-    if rlt_print: print(json.dumps(get_world_map_json, indent=4))
+    if rlt_print:
+        print(json.dumps(get_world_map_json, indent=4))
 
     return (get_world_map_json)
 
@@ -377,7 +386,8 @@ def get_world_token(
     world_token_response = requests.get(
         world_token_url, headers=headers, params=world_token_params)
     world_token_json = json.loads(world_token_response.content)
-    if rlt_print: print(json.dumps(world_token_json, indent=4))
+    if rlt_print:
+        print(json.dumps(world_token_json, indent=4))
 
     return (world_token_json)
 
@@ -425,7 +435,8 @@ def post_score(
     post_score_response = requests.post(
         post_score_url, headers=headers, data=post_score_data)
     post_score_json = json.loads(post_score_response.content)
-    if rlt_print: print(json.dumps(post_score_json, indent=4))
+    if rlt_print:
+        print(json.dumps(post_score_json, indent=4))
 
     return (post_score_json)
 
@@ -454,7 +465,8 @@ def rank_friend(song_id, difficulty, start, limit, rlt_print=False):
     rank_friend_response = requests.get(
         rank_friend_url, headers=headers, params=rank_friend_params)
     rank_friend_json = json.loads(rank_friend_response.content)
-    if rlt_print: print(json.dumps(rank_friend_json, indent=4))
+    if rlt_print:
+        print(json.dumps(rank_friend_json, indent=4))
 
     return (rank_friend_json)
 
@@ -484,7 +496,8 @@ def rank_me(song_id, difficulty, start, limit, rlt_print=False):
     rank_me_response = requests.get(
         rank_me_url, headers=headers, params=rank_me_params)
     rank_me_json = json.loads(rank_me_response.content)
-    if rlt_print: print(json.dumps(rank_me_json, indent=4))
+    if rlt_print:
+        print(json.dumps(rank_me_json, indent=4))
 
     return (rank_me_json)
 
@@ -538,7 +551,8 @@ def rank_world(song_id, difficulty, start, limit, rlt_print=False):
     rank_world_response = requests.get(
         rank_world_url, headers=headers, params=rank_world_params)
     rank_world_json = json.loads(rank_world_response.content)
-    if rlt_print: print(json.dumps(rank_world_json, indent=4))
+    if rlt_print:
+        print(json.dumps(rank_world_json, indent=4))
 
     return (rank_world_json)
 
@@ -571,7 +585,8 @@ def set_character(character, skill_sealed=False, rlt_print=False):
     set_character_response = requests.post(
         set_character_url, headers=headers, data=set_character_data)
     set_character_json = json.loads(set_character_response.content)
-    if rlt_print: print(json.dumps(set_character_json, indent=4))
+    if rlt_print:
+        print(json.dumps(set_character_json, indent=4))
 
     return (set_character_json)
 
@@ -602,7 +617,8 @@ def set_map(map_id, rlt_print=False):
     set_map_response = requests.post(
         set_map_url, headers=headers, data=set_map_data)
     set_map_json = json.loads(set_map_response.content)
-    if rlt_print: print(json.dumps(set_map_json, indent=4))
+    if rlt_print:
+        print(json.dumps(set_map_json, indent=4))
 
     return (set_map_json)
 
@@ -636,12 +652,15 @@ def user_info(rlt_print=False):
     user_info_response = requests.get(
         user_info_url, headers=headers, params=user_info_params)
     user_info_json = json.loads(user_info_response.content)
-    if rlt_print: print(json.dumps(user_info_json, indent=4))
+    if rlt_print:
+        print(json.dumps(user_info_json, indent=4))
 
     return (user_info_json)
 
 
-def user_login(name, password, add_auth=True, change_device_id=False, rlt_print=False):
+def user_login(
+        name, password, add_auth=True,
+        change_device_id=False, rlt_print=False):
     '''
     attention:
         your account will be banned for a while
@@ -672,7 +691,8 @@ def user_login(name, password, add_auth=True, change_device_id=False, rlt_print=
 
     login_response = requests.post(login_url, headers=headers, data=login_data)
     login_json = json.loads(login_response.content)
-    if rlt_print: print(json.dumps(login_json, indent=4))
+    if rlt_print:
+        print(json.dumps(login_json, indent=4))
 
     if (login_json['success']):
         if (add_auth):
@@ -724,7 +744,8 @@ def user_register(
     register_response = requests.post(
         register_url, headers=headers, data=register_data)
     register_json = json.loads(register_response.content)
-    if rlt_print: print(json.dumps(register_json, indent=4))
+    if rlt_print:
+        print(json.dumps(register_json, indent=4))
 
     if (register_json['success']):
         if (add_auth):

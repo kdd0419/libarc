@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands 
+from discord.ext import commands
 import pickle
 import os
 import google_sheet_write as xlsx_w
@@ -21,7 +21,7 @@ async def on_ready():
 
     await bot.change_presence(
         activity=discord.Activity(
-            name="Command : '#sheet <friend code>'", 
+            name="Command : '#sheet <friend code>'",
             type=discord.ActivityType.watching),
         status=discord.Status.online
     )
@@ -63,6 +63,7 @@ async def sheet(ctx, friend_code):
 
     xlsx_w.write_sheet(sheet_service, spread_id, all_score)
     xlsx_w.update_sheet(sheet_service, spread_id, len(all_score))
+    print(user_name + ":" + spread_url)
     await ctx.send(spread_url)
 
 bot.run(TOKEN)

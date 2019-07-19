@@ -5189,7 +5189,7 @@
                 {
                     "ratingClass": 1,
                     "rating": 6,
-                    "fixedValue": 6
+                    "fixedValue": 6.5
                 },
                 {
                     "ratingClass": 2,
@@ -5207,7 +5207,7 @@
                 {
                     "ratingClass": 0,
                     "rating": 4,
-                    "fixedValue": 4
+                    "fixedValue": 4.5
                 },
                 {
                     "ratingClass": 1,
@@ -5230,7 +5230,7 @@
                 {
                     "ratingClass": 0,
                     "rating": 3,
-                    "fixedValue": 3
+                    "fixedValue": 3.5
                 },
                 {
                     "ratingClass": 1,
@@ -5253,7 +5253,7 @@
                 {
                     "ratingClass": 0,
                     "rating": 5,
-                    "fixedValue": 5
+                    "fixedValue": 5.5
                 },
                 {
                     "ratingClass": 1,
