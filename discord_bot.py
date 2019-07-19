@@ -2,8 +2,12 @@ import discord
 from discord.ext import commands 
 import pickle
 import os
+import google_sheet_write as xlsx_w
 
-bot = commands.Bot(command_prefix='#')
+bot = commands.Bot(
+    command_prefix='#',
+    help_command=commands.DefaultHelpCommand()
+)
 
 with open('bot_token.pickle', 'rb') as token_f:
     TOKEN = pickle.load(token_f)
@@ -17,16 +21,15 @@ async def on_ready():
 
     await bot.change_presence(
         activity=discord.Activity(
-            name="Command", type=discord.ActivityType.watching,
-            details="Command '#sheet <friend code>'"),
+            name="Command : '#sheet <friend code>'", 
+            type=discord.ActivityType.watching),
         status=discord.Status.online
     )
 
 
 @bot.command()
-async def sheet(ctx, arg):
-    await ctx.send('writting spreadsheet...')
-    import google_sheet_write as xlsx_w
+async def sheet(ctx, friend_code):
+    await ctx.send('writing spreadsheet...')
 
     creds = xlsx_w.credential()
 
@@ -40,7 +43,7 @@ async def sheet(ctx, arg):
 
     admin = xlsx_w.arc_parse.admin_login()
     xlsx_w.arc_parse.admin_del_all_friends(admin)
-    user_name = xlsx_w.arc_parse.get_user_name(friend_code=arg)
+    user_name = xlsx_w.arc_parse.get_user_name(friend_code)
     all_score = xlsx_w.getArcScore()
     xlsx_w.arc_parse.admin_del_all_friends(admin)
 
@@ -61,7 +64,5 @@ async def sheet(ctx, arg):
     xlsx_w.write_sheet(sheet_service, spread_id, all_score)
     xlsx_w.update_sheet(sheet_service, spread_id, len(all_score))
     await ctx.send(spread_url)
-
-        
 
 bot.run(TOKEN)
