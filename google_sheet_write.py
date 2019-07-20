@@ -36,8 +36,9 @@ def credential():
 
 
 def getArcScore():
-    all_score = arc_parse.get_all_score(
-        song_info=arc_parse.get_songinfo())
+    import asyncio
+    all_score = asyncio.run(arc_parse.get_all_score(
+        song_info=arc_parse.get_songinfo()))
     for song in range(len(all_score)):
         all_score[song] = list(all_score[song].values())
     all_score.insert(0, arc_parse.fieldnames)

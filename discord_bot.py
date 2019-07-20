@@ -44,10 +44,14 @@ async def sheet(ctx, friend_code):
     admin = xlsx_w.arc_parse.admin_login()
     xlsx_w.arc_parse.admin_del_all_friends(admin)
     user_name = xlsx_w.arc_parse.get_user_name(friend_code)
-    all_score = xlsx_w.getArcScore()
+    all_score = await xlsx_w.arc_parse.get_all_score(
+        song_info=xlsx_w.arc_parse.get_songinfo())
+    for song in range(len(all_score)):
+        all_score[song] = list(all_score[song].values())
+    all_score.insert(0, xlsx_w.arc_parse.fieldnames)
     xlsx_w.arc_parse.admin_del_all_friends(admin)
 
-    if os.path.exists("./"+user_name+'/sheet_create_rlt.json'):
+    if os.path.exists("./spread_sheet/"+user_name+'_sheet_create_rlt.json'):
         response = xlsx_w.get_sheet_info_file(user_name)
         spread_id = response['spreadsheetId']
         spread_url = response['spreadsheetUrl']

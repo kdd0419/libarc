@@ -1,6 +1,7 @@
 import json
 import libarc as arc
 import os
+import asyncio
 
 
 def admin_login():
@@ -80,44 +81,42 @@ clear_mode = [
     'Full Recall', 'Pure Memory',
     'Track Complete (Easy Gauge)', 'Track Complete (Hard Gauge)']
 
+async def get_score(song_info, diff_i):
+    score_dic = {
+        "song_name": song_info['name'],
+        "difficulty": diff[diff_i],
+        "level": song_info['level'][diff_i][0],
+        "detail level": song_info['level'][diff_i][1]}
+    score_json = arc.rank_friend(song_info['id'], diff_i, 0, 1)
+    if not score_json['success']:
+        print(song_info['name'], diff[diff_i], ": failed")
+        score_dic['best_clear_type'] = 'Load Failed'
+        return score_dic
+    else:
+        print(song_info['name'], diff[diff_i], ": success")
+    score = score_json['value']
+    if len(score) > 0:
+        score_dic['best_clear_type'] = clear_mode[score[0]['best_clear_type']]
+        row = ['score', 'shiny_perfect_count', 'perfect_count', 'near_count', 'miss_count']
+        for r in row:
+            score_dic[r] = score[0][r]
+        score_dic['potential'] = pttCalc(score[0]['score'], song_info['level'][diff_i][1])
+    return score_dic
 
-def get_all_score(song_info):
-    rlt = []
-    for i in range(len(song_info)*3):
-        score_json = arc.rank_friend(song_info[i // 3]['id'], i % 3, 0, 1)
 
-        if not score_json['success']:
-            print(song_info[i // 3]['name'], diff[i % 3], ": failed")
-            continue
-        else:
-            print(song_info[i // 3]['name'], diff[i % 3], ": success")
+async def get_future_scores(song_info):
+    tasks = [
+        asyncio.create_task(get_score(song, 2)) for song in song_info]
+    future_scores = await asyncio.gather(*tasks)
+    return future_scores
 
-        score = score_json['value']
 
-        tmp_dic = {
-            "song_name": song_info[i // 3]['name'], "difficulty": diff[i % 3],
-            "level": song_info[i // 3]['level'][i % 3][0],
-            "detail level": song_info[i // 3]['level'][i % 3][1]}
-
-        if len(score) <= 0:
-            rlt.append(tmp_dic)
-
-        else:
-            tmp_dic['best_clear_type'] = clear_mode[
-                score[0]['best_clear_type']]
-
-            row = [
-                'score', 'shiny_perfect_count', 'perfect_count',
-                'near_count', 'miss_count']
-
-            for r in row:
-                tmp_dic[r] = score[0][r]
-
-            tmp_dic['potential'] = pttCalc(
-                score[0]['score'], song_info[i // 3]['level'][i % 3][1])
-
-            rlt.append(tmp_dic)
-    return rlt
+async def get_all_score(song_info):
+    tasks = [
+        asyncio.create_task(get_score(song, i)) for song in song_info for i in range(3)    
+    ]
+    all_score = await asyncio.gather(*tasks)
+    return all_score
 
 fieldnames = [
     'song_name', 'difficulty', 'level', 'detail level', 'score',
@@ -153,7 +152,7 @@ def main():
     user_name = get_user_name(
         friend_code=input('input your friend-add code > '))
 
-    all_score = get_all_score(song_info=get_songinfo())
+    all_score = asyncio.run(get_all_score(song_info=get_songinfo()))
 
     score_file_write(score=all_score, user_name=user_name)
 
@@ -161,3 +160,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
