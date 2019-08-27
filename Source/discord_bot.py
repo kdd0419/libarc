@@ -126,10 +126,4 @@ async def sheet(ctx, friend_code, *limit):
     print(user_name + ":" + spread_url)
     await ctx.send(spread_url)
 
-
-@bot.command()
-async def test(ctx, *params):
-    print(params)
-    print(decode_limit(params))
-
 bot.run(TOKEN)

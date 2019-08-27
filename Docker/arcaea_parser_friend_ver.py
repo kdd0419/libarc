@@ -35,6 +35,17 @@ def admin_del_all_friends(admin):
         arc.friend_del(friend['user_id'])
 
 
+def admin_setting():
+    if os.path.exists('./static_uuid.txt'):
+        get_uuid_from_file()
+    else:
+        set_uuid_into_file()
+
+    admin = admin_login()
+    admin_del_all_friends(admin=admin)
+    return admin
+
+
 def get_user_name(friend_code):  # include admin add friend
     add_rlt = arc.friend_add(friend_code)
     user_name = add_rlt['value']['friends'][0]['name']
@@ -49,12 +60,12 @@ def get_songinfo():
 
     song_info = []
     for song in songlist:
-        song_info.append({
-            'id': song['id'], 'name': song['title_localized']['en'],
-            'level': [
-                    [diff['rating'], diff['fixedValue']]
-                    for diff in song['difficulties']
-                ]
+        for diff in song['difficulties']:
+            song_info.append({
+                'id': song['id'], 'name': song['title_localized']['en'],
+                'rating class': diff['ratingClass'],
+                'level': diff['rating'],
+                'base potential': diff['fixedValue']
             })
 
     return song_info
@@ -81,40 +92,61 @@ clear_mode = [
     'Full Recall', 'Pure Memory',
     'Track Complete (Easy Gauge)', 'Track Complete (Hard Gauge)']
 
-async def get_score(song_info, diff_i):
+async def get_score(song_info):
     score_dic = {
         "song_name": song_info['name'],
-        "difficulty": diff[diff_i],
-        "level": song_info['level'][diff_i][0],
-        "detail level": song_info['level'][diff_i][1]}
-    score_json = arc.rank_friend(song_info['id'], diff_i, 0, 1)
+        "difficulty": diff[song_info['rating class']],
+        "level": song_info['level'],
+        "detail level": song_info['base potential']}
+    score_json = arc.rank_friend(
+        song_info['id'], song_info['rating class'], 0, 1)
     if not score_json['success']:
-        print(song_info['name'], diff[diff_i], ": failed")
+        print(song_info['name'], diff[song_info['rating class']], ": failed")
         score_dic['best_clear_type'] = 'Load Failed'
         return score_dic
     else:
-        print(song_info['name'], diff[diff_i], ": success")
+        print(song_info['name'], diff[song_info['rating class']], ": success")
     score = score_json['value']
     if len(score) > 0:
         score_dic['best_clear_type'] = clear_mode[score[0]['best_clear_type']]
-        row = ['score', 'shiny_perfect_count', 'perfect_count', 'near_count', 'miss_count']
+        row = [
+            'score', 'shiny_perfect_count', 'perfect_count',
+            'near_count', 'miss_count']
         for r in row:
             score_dic[r] = score[0][r]
-        score_dic['potential'] = pttCalc(score[0]['score'], song_info['level'][diff_i][1])
+        score_dic['potential'] = pttCalc(
+            score[0]['score'], song_info['base potential'])
     return score_dic
 
 
-async def get_future_scores(song_info):
+async def get_limit_scores(song_info, limit):
+    if len(limit['mode']) > 0:
+        song_info = [
+            song for song in song_info if song['rating class'] in limit['mode']]
+    if len(limit['level']) == 1:
+        song_info = [song for song in song_info if song['level'] >= limit['level'][0]]
+    if len(limit['level']) == 2:
+        song_info = [
+            song for song in song_info
+            if limit['level'][0] <= song['level'] <= limit['level'][1]]
+    if len(limit['base potential']) == 1:
+        song_info = [
+            song for song in song_info
+            if song['base potential'] >= limit['base potential'][0]]
+    if len(limit['base potential']) == 2:
+        song_info = [
+            song for song in song_info
+            if limit['base potential'][0] <= song['base potential'] and
+            song['base potential'] <= limit['base potential'][1]]
     tasks = [
-        asyncio.create_task(get_score(song, 2)) for song in song_info]
+        asyncio.create_task(get_score(song)) for song in song_info]
     future_scores = await asyncio.gather(*tasks)
     return future_scores
 
 
 async def get_all_score(song_info):
     tasks = [
-        asyncio.create_task(get_score(song, i)) for song in song_info for i in range(3)    
-    ]
+        asyncio.create_task(get_score(song)) for song in song_info]
     all_score = await asyncio.gather(*tasks)
     return all_score
 
@@ -141,13 +173,7 @@ def score_file_write(score, user_name):
 
 
 def main():
-    if os.path.exists('./static_uuid.txt'):
-        get_uuid_from_file()
-    else:
-        set_uuid_into_file()
-
-    admin = admin_login()
-    admin_del_all_friends(admin=admin)
+    admin = admin_setting()
 
     user_name = get_user_name(
         friend_code=input('input your friend-add code > '))
@@ -160,4 +186,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

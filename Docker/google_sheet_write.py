@@ -161,13 +161,8 @@ def main():
     sheet_service = build('sheets', 'v4', credentials=creds)
     drive_service = build('drive', 'v3', credentials=creds)
 
-    if os.path.exists('./static_uuid.txt'):
-        arc_parse.get_uuid_from_file()
-    else:
-        arc_parse.set_uuid_into_file()
+    admin = arc_parse.admin_setting()
 
-    admin = arc_parse.admin_login()
-    arc_parse.admin_del_all_friends(admin)
     user_name = arc_parse.get_user_name(
         friend_code=input('input your friend-add code > '))
     all_score = getArcScore()
