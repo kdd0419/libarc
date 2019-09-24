@@ -9,7 +9,7 @@ headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Accept-Encoding': 'br, gzip, deflate',
     'AppVersion': '2.3.2',
-    'User-Agent': 'Arc-mobile/2.2.0.0 CFNetwork/976 Darwin/18.2.0'
+    'User-Agent': 'CFNetwork/976 Darwin/18.2.0'
 }
 
 # generate uuid: str(uuid.uuid4()).upper()
