@@ -8,7 +8,7 @@ headers = {
     'Accept': '*/*',
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Accept-Encoding': 'br, gzip, deflate',
-    'AppVersion': '2.3.2',
+    'AppVersion': '2.6.0',
     'User-Agent': 'CFNetwork/976 Darwin/18.2.0'
 }
 
@@ -19,8 +19,8 @@ static_uuid = '41EA0069-AED7-4902-BF82-1E03793146A7'
 auth_str = ''
 headers['Authorization'] = auth_str
 
-print('static_uuid: ' + static_uuid)
-print('auth_str: ' + auth_str)
+# print('static_uuid: ' + static_uuid)
+# print('auth_str: ' + auth_str)
 
 
 def calc_score(shiny_perfect_count, perfect_count, near_count, miss_count):
@@ -45,7 +45,7 @@ def char_upgrade(character, rlt_print=False):
 
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    char_upgrade_url = 'https://arcapi.lowiro.com/7/user/me/character/' + \
+    char_upgrade_url = 'https://arcapi.lowiro.com/10/user/me/character/' + \
         str(character) + '/exp'
 
     char_upgrade_response = requests.post(char_upgrade_url, headers=headers)
@@ -70,7 +70,7 @@ def char_awaken(character, rlt_print=False):
 
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    char_awaken_url = 'https://arcapi.lowiro.com/7/user/me/character/' + \
+    char_awaken_url = 'https://arcapi.lowiro.com/10/user/me/character/' + \
         str(character) + '/uncap'
 
     char_awaken_response = requests.post(char_awaken_url, headers=headers)
@@ -131,7 +131,7 @@ def friend_add(friend_code, rlt_print=False):
     friend_add_data = {'friend_code': friend_code}
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    friend_add_url = 'https://arcapi.lowiro.com/7/friend/me/add'
+    friend_add_url = 'https://arcapi.lowiro.com/10/friend/me/add'
     #
     friend_add_response = requests.post(
         friend_add_url, headers=headers, data=friend_add_data)
@@ -159,7 +159,7 @@ def friend_del(friend_id, rlt_print=False):
     friend_del_data = {'friend_id': friend_id}
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    friend_del_url = 'https://arcapi.lowiro.com/7/friend/me/delete'
+    friend_del_url = 'https://arcapi.lowiro.com/10/friend/me/delete'
 
     friend_del_response = requests.post(
         friend_del_url, headers=headers, data=friend_del_data)
@@ -180,7 +180,7 @@ def frag_friend_slot(rlt_print=False):
     '''
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    friend_slot_url = 'https://arcapi.lowiro.com/7/purchase/me/friend/fragment'
+    friend_slot_url = 'https://arcapi.lowiro.com/10/purchase/me/friend/fragment'
     friend_slot_response = requests.post(friend_slot_url, headers=headers)
     friend_slot_json = json.loads(friend_slot_response.content)
     if rlt_print:
@@ -209,7 +209,7 @@ def frag_stamina(rlt_print=False):
     '''
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    stamina_url = 'https://arcapi.lowiro.com/7/purchase/me/stamina/fragment'
+    stamina_url = 'https://arcapi.lowiro.com/10/purchase/me/stamina/fragment'
     stamina_response = requests.post(stamina_url, headers=headers)
     stamina_json = json.loads(stamina_response.content)
     if rlt_print:
@@ -283,7 +283,7 @@ def get_character_info(rlt_print=False):
 
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    get_character_info_url = 'https://arcapi.lowiro.com/7/user/me/character'
+    get_character_info_url = 'https://arcapi.lowiro.com/10/user/me/character'
 
     get_character_info_response = requests.get(
         get_character_info_url, headers=headers)
@@ -310,7 +310,7 @@ def get_score_token(rlt_print=False):
 
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    get_score_token_url = 'https://arcapi.lowiro.com/7/score/token'
+    get_score_token_url = 'https://arcapi.lowiro.com/10/score/token'
 
     get_score_token_response = requests.get(
         get_score_token_url, headers=headers)
@@ -331,7 +331,7 @@ def get_world_map(rlt_print=False):
 
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    get_world_map_url = 'https://arcapi.lowiro.com/7/world/map/me'
+    get_world_map_url = 'https://arcapi.lowiro.com/10/world/map/me'
 
     get_world_map_response = requests.get(get_world_map_url, headers=headers)
     get_world_map_json = json.loads(get_world_map_response.content)
@@ -381,7 +381,7 @@ def get_world_token(
 
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    world_token_url = 'https://arcapi.lowiro.com/7/score/token/world'
+    world_token_url = 'https://arcapi.lowiro.com/10/score/token/world'
 
     world_token_response = requests.get(
         world_token_url, headers=headers, params=world_token_params)
@@ -430,7 +430,7 @@ def post_score(
     }
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    post_score_url = 'https://arcapi.lowiro.com/7/score/song'
+    post_score_url = 'https://arcapi.lowiro.com/10/score/song'
 
     post_score_response = requests.post(
         post_score_url, headers=headers, data=post_score_data)
@@ -460,7 +460,7 @@ def rank_friend(song_id, difficulty, start, limit, rlt_print=False):
     }
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    rank_friend_url = 'https://arcapi.lowiro.com/7/score/song/friend'
+    rank_friend_url = 'https://arcapi.lowiro.com/10/score/song/friend'
 
     rank_friend_response = requests.get(
         rank_friend_url, headers=headers, params=rank_friend_params)
@@ -491,7 +491,7 @@ def rank_me(song_id, difficulty, start, limit, rlt_print=False):
     }
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    rank_me_url = 'https://arcapi.lowiro.com/7/score/song/me'
+    rank_me_url = 'https://arcapi.lowiro.com/10/score/song/me'
 
     rank_me_response = requests.get(
         rank_me_url, headers=headers, params=rank_me_params)
@@ -546,7 +546,7 @@ def rank_world(song_id, difficulty, start, limit, rlt_print=False):
     }
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    rank_world_url = 'https://arcapi.lowiro.com/7/score/song'
+    rank_world_url = 'https://arcapi.lowiro.com/10/score/song'
 
     rank_world_response = requests.get(
         rank_world_url, headers=headers, params=rank_world_params)
@@ -580,7 +580,7 @@ def set_character(character, skill_sealed=False, rlt_print=False):
     }
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    set_character_url = 'https://arcapi.lowiro.com/7/user/me/character'
+    set_character_url = 'https://arcapi.lowiro.com/10/user/me/character'
 
     set_character_response = requests.post(
         set_character_url, headers=headers, data=set_character_data)
@@ -612,7 +612,7 @@ def set_map(map_id, rlt_print=False):
     set_map_data = {'map_id': map_id}
     if (auth_str and ('Authorization' not in headers)):
         headers['Authorization'] = auth_str
-    set_map_url = 'https://arcapi.lowiro.com/7/world/map/me/'
+    set_map_url = 'https://arcapi.lowiro.com/10/world/map/me/'
     #
     set_map_response = requests.post(
         set_map_url, headers=headers, data=set_map_data)
@@ -648,7 +648,7 @@ def user_info(rlt_print=False):
         }
     ]
     user_info_params['calls'] = json.dumps(call_list)
-    user_info_url = 'https://arcapi.lowiro.com/7/compose/aggregate'
+    user_info_url = 'https://arcapi.lowiro.com/10/compose/aggregate'
     user_info_response = requests.get(
         user_info_url, headers=headers, params=user_info_params)
     user_info_json = json.loads(user_info_response.content)
@@ -687,7 +687,7 @@ def user_login(
         (login_cred['name'] + ':' + login_cred['password']).encode('utf-8')),
         'utf-8'
     )
-    login_url = 'https://arcapi.lowiro.com/7/auth/login'
+    login_url = 'https://arcapi.lowiro.com/10/auth/login'
 
     login_response = requests.post(login_url, headers=headers, data=login_data)
     login_json = json.loads(login_response.content)
@@ -739,7 +739,7 @@ def user_register(
         print('new_uuid: ' + static_uuid)
     if ('Authorization' in headers):
         headers.pop('Authorization')
-    register_url = 'https://arcapi.lowiro.com/7/user/'
+    register_url = 'https://arcapi.lowiro.com/10/user/'
 
     register_response = requests.post(
         register_url, headers=headers, data=register_data)
