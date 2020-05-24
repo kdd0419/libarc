@@ -634,18 +634,9 @@ def user_info(rlt_print=False):
         headers['Authorization'] = auth_str
     user_info_params = {}
     call_list = [
-        {
-            "endpoint": "user/me",
-                        "id": 0
-        },
-        {
-            "endpoint": "purchase/bundle/pack",
-                        "id": 1
-        },
-        {
-            "endpoint": "serve/download/me/song?url=false",
-                        "id": 2
-        }
+        {"id": 0, "endpoint": "user/me"},
+        {"id": 1, "endpoint": "purchase/bundle/pack"},
+        {"id": 2, "endpoint": "serve/download/me/song?url=false"}
     ]
     user_info_params['calls'] = json.dumps(call_list)
     user_info_url = 'https://arcapi.lowiro.com/10/compose/aggregate'

@@ -89,8 +89,8 @@ async def sheet(ctx, friend_code, *limit):
     sheet_service = xlsx_w.build('sheets', 'v4', credentials=creds)
     drive_service = xlsx_w.build('drive', 'v3', credentials=creds)
 
-    admin = xlsx_w.arc_parse.admin_setting()
-    user_name = xlsx_w.arc_parse.get_user_name(friend_code)
+    admin = await xlsx_w.arc_parse.admin_setting()
+    user_name = await xlsx_w.arc_parse.get_user_name(friend_code)
     if len(limit) > 0:
         limit = decode_limit(limit)
         if limit == decode_limit.error:
@@ -105,7 +105,7 @@ async def sheet(ctx, friend_code, *limit):
     for song in range(len(all_score)):
         all_score[song] = list(all_score[song].values())
     all_score.insert(0, xlsx_w.arc_parse.fieldnames)
-    xlsx_w.arc_parse.admin_del_all_friends(admin)
+    await xlsx_w.arc_parse.admin_del_all_friends(admin)
 
     if os.path.exists("./spread_sheet/"+user_name+'_sheet_create_rlt.json'):
         response = xlsx_w.get_sheet_info_file(user_name)

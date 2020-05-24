@@ -5,6 +5,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import json
 import arcaea_parser_friend_ver as arc_parse
+import asyncio
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = [
@@ -35,10 +36,9 @@ def credential():
     return creds
 
 
-def getArcScore():
-    import asyncio
-    all_score = asyncio.run(arc_parse.get_all_score(
-        song_info=arc_parse.get_songinfo()))
+async def getArcScore():
+    all_score = await arc_parse.get_all_score(
+        song_info=arc_parse.get_songinfo())
     for song in range(len(all_score)):
         all_score[song] = list(all_score[song].values())
     all_score.insert(0, arc_parse.fieldnames)
@@ -155,18 +155,18 @@ def get_sheet_info_file(user_name):
         return json.load(f)
 
 
-def main():
+async def main():
     creds = credential()
 
     sheet_service = build('sheets', 'v4', credentials=creds)
     drive_service = build('drive', 'v3', credentials=creds)
 
-    admin = arc_parse.admin_setting()
+    admin = await arc_parse.admin_setting()
 
-    user_name = arc_parse.get_user_name(
+    user_name = await arc_parse.get_user_name(
         friend_code=input('input your friend-add code > '))
-    all_score = getArcScore()
-    arc_parse.admin_del_all_friends(admin)
+    all_score = await getArcScore()
+    await arc_parse.admin_del_all_friends(admin)
 
     if os.path.exists("./spread_sheet/"+user_name+'_sheet_create_rlt.json'):
         response = get_sheet_info_file(user_name)
@@ -188,4 +188,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
