@@ -4,8 +4,6 @@ import os
 import asyncio
 
 
-
-
 async def admin_login():
     import pickle
     with open('login_info.pickle', 'rb') as pkf:
@@ -72,19 +70,22 @@ def get_songinfo():
 
 
 def pttCalc(score, fixedValue):
+    # if score <= 9800000:
+    #     bouns = (score - 9500000) / 300000
+    # elif score > 9800000 and score < 9950000:
+    #     bouns = (score - 9800000) / 400000 + 1
+    # elif score >= 9950000 and score < 10000000:
+    #     bouns = (score - 9950000) / 100000 + 1.5
+    # elif score >= 10000000:
+    #     bouns = 2
     if score <= 9800000:
-        bouns = (score - 9500000) / 300000
-    elif score > 9800000 and score < 9950000:
-        bouns = (score - 9800000) / 400000 + 1
-    elif score >= 9950000 and score < 10000000:
-        bouns = (score - 9950000) / 100000 + 1.5
+        bonus = (score - 9500000) / 300000
+    elif score < 10000000:
+        bonus = (score - 9800000) / 200000 + 1
     elif score >= 10000000:
-        bouns = 2
+        bonus = 2
+    return bonus + fixedValue if bonus + fixedValue > 0 else 0
 
-    ptt = bouns + fixedValue
-    if ptt < 0:
-        ptt = 0
-    return ptt
 
 diff = ['PAST', 'PRESENT', 'FUTURE']
 clear_mode = [

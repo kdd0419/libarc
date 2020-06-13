@@ -4,8 +4,8 @@ import uuid
 import base64
 import json
 
-ARCAEA_API_VERSION = '10'
-MAIN_ADDRESS = 'https://arcapi.lowiro.com/' + ARCAEA_API_VERSION
+ARCAEA_API_VERSION = '12/'
+MAIN_ADDRESS = 'https://arcapi.lowiro.com/coffee/' + ARCAEA_API_VERSION
 
 static_uuid = ''
 auth_str = ''
@@ -15,7 +15,7 @@ headers = {
     'Accept': '*/*',
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Accept-Encoding': 'br, gzip, deflate',
-    'AppVersion': '2.6.0',
+    'AppVersion': '3.0.0',
     'User-Agent': 'CFNetwork/976 Darwin/18.2.0',
     'Authorization': auth_str
 }
@@ -45,6 +45,7 @@ async def user_register(
     example:
         user_register('holy616', '616isgod', 'love616forever@gmail.com')
     '''
+    global static_uuid, auth_str
 
     register_data = {
         'name': name,
@@ -90,9 +91,12 @@ async def user_login(
     example:
         user_login('tester2234', 'tester223344')
     '''
+    global static_uuid, auth_str
+
     if change_device_id:
-        headers['device_id'] = static_uuid = str(uuid.uuid4()).upper()
+        static_uuid = str(uuid.uuid4()).upper()
         print('new_uuid: ' + static_uuid)
+    headers['DeviceId'] = static_uuid
 
     headers['Authorization'] = 'Basic ' + str(
         base64.b64encode(f'{name}:{password}'.encode('utf-8')), 'utf-8')
